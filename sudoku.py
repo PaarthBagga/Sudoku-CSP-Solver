@@ -25,7 +25,7 @@ def get_peers(row, col):
     peers.discard((row, col))  # Remove the cell itself
     return peers
 
-# Initialize domains for all cells
+# Initialize domains for every cell
 def initialize_domains(board):
     domains = {}
     for row in range(9):
