@@ -1,14 +1,7 @@
 {
-	"folders": [
-		{
-			"path": "../A2"
-		},
-		{
-			"path": "../8-puzzle"
-		},
-		{
-			"path": "."
-		}
-	],
-	"settings": {}
+    "folders": [
+        {
+            "path": "."
+        }
+    ]
 }
