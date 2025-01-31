@@ -137,4 +137,4 @@ def solve_sudoku(file_path):
     print_board(board)
 
 # Example usage
-solve_sudoku('test_text.txt')
+solve_sudoku('test_file.txt')
