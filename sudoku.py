@@ -26,15 +26,17 @@ def get_peers(row, col):
     peers.discard((row, col))  # Remove the cell itself
     return peers
 
-# Initialize domains for all cells
+# Initialize domains for every cell
 def initialize_domains(board):
     domains = {}
     for row in range(9):
         for col in range(9):
             if board[row][col] == 0:
                 domains[(row, col)] = set(range(1, 10))
+
             else:
                 domains[(row, col)] = {board[row][col]}
+
     return domains
 
 # AC-3 algorithm implementation
@@ -135,4 +137,4 @@ def solve_sudoku(file_path):
     print_board(board)
 
 # Example usage
-solve_sudoku('sudoku.txt')
+solve_sudoku('test_text.txt')
