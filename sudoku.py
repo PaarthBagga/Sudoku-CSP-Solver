@@ -1,4 +1,5 @@
 from collections import deque
+import matplotlib.pyplot as plt
 
 # Helper function to read Sudoku from a file
 def read_puzzle(file_path):
@@ -25,7 +26,7 @@ def get_peers(row, col):
     peers.discard((row, col))  # Remove the cell itself
     return peers
 
-# Initialize domains for every cell
+# Initialize domains for all cells
 def initialize_domains(board):
     domains = {}
     for row in range(9):
@@ -39,10 +40,12 @@ def initialize_domains(board):
 # AC-3 algorithm implementation
 def ac3(board, domains):
     queue = deque([(cell, peer) for cell in domains for peer in get_peers(*cell)])
+    queue_size = []
     step = 1  # Step counter
 
     while queue:
         print(f"Step {step}: Queue length: {len(queue)}")  # Print the step and queue length
+        queue_size.append(len(queue))
         cell, peer = queue.popleft()
         if revise(domains, cell, peer):
             if not domains[cell]:  # Domain is empty -> failure
@@ -52,6 +55,7 @@ def ac3(board, domains):
             for neighbor in get_peers(*cell) - {peer}:
                 queue.append((neighbor, cell))
         step += 1  # Increment step counter
+    plot_queue_length(queue_size)
     return True
 
 # Revise function to enforce arc-consistency
@@ -96,6 +100,17 @@ def is_consistent(board, row, col, val):
         if board[peer_row][peer_col] == val:
             return False
     return True
+# Function to visualize the size of the queue at each step
+def plot_queue_length(queue_size):
+    plt.figure(figsize=(6, 4))
+    plt.plot(queue_size, marker='o', linestyle='-', color='b', label="Queue Size")
+    plt.xlabel("Step")
+    plt.ylabel("Queue Length")
+    plt.title("Queue Length at Each AC-3 Step")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
 
 # Solve function
 def solve_sudoku(file_path):
@@ -120,6 +135,4 @@ def solve_sudoku(file_path):
     print_board(board)
 
 # Example usage
-solve_sudoku('test_file.txt')
-
-
+solve_sudoku('sudoku.txt')
