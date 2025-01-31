@@ -16,6 +16,7 @@ The solver reads a **9×9** Sudoku puzzle from a file and attempts to solve it e
 
 - Language: Python
 - Libraries: matplotlib
+- Technologies: Git
 
 ## 🔄 Algorithm
 
@@ -89,7 +90,8 @@ pip install matplotlib
 
 1. Drag and Drop a Test Case
   - Open the test_cases folder.
-  - Drag and drop a test case file (.txt) onto the terminal after running the script.
+  - Drag and drop a test case file (.txt) into the main folder before running the script.
+  - Ensure only one test case file is in the main folder before running (top most directory).
 
 2. Run the Sudoku solver:
 ```
@@ -111,4 +113,24 @@ The plot helps in analyzing how the queue length changes over time:
 - **Peak Point:** Maximum constraints are present before reduction begins.
 - **Decline:** Constraints are gradually resolved, reducing the queue.
 - **Completion:** The queue eventually empties as AC-3 finalizes consistency.
+
+  <hr> 
+
+  ## 🔍 Code Overview
+  
+### **📝 Key Functions**
+| Function | Description |
+|----------|------------|
+| `read_puzzle(file_path)` | Reads a sudoku puzzle from a file. |
+| `print_board(board)` | Displays the sudoku grid. |
+| `get_peers(row, col)` | Returns all peer cells for a given cell. |
+| `initialize_domains(board)` | Sets possible values (domains) for each cell. |
+| `ac3(board, domains)` | Runs the AC-3 algorithm, **records queue length**, and plots the queue size. |
+| `revise(domains, cell, peer)` | Removes inconsistent values from a cell’s domain. |
+| `find_empty(board)` | Finds the next empty cell in the grid. |
+| `backtrack(board, domains)` | Uses backtracking to fill in remaining empty cells. |
+| `is_consistent(board, row, col, val)` | Checks if value validity for a given cell. |
+| `plot_queue_length(queue_size)` | **Plots queue size over AC-3 execution.** |
+| `solve_sudoku(file_path)` | Integrates all functions to read, solve, and display the puzzle. |
+  
 
